@@ -1,6 +1,7 @@
 config network
 	option init network
 	list affects dhcp
+	list affects tbqd
 	list affects radvd
 
 config wireless
@@ -9,7 +10,6 @@ config wireless
 config firewall
 	option init firewall
 	list affects luci-splash
-	list affects qos
 	list affects miniupnpd
 
 config olsr
@@ -30,6 +30,9 @@ config httpd
 
 config fstab
 	option init fstab
+
+config tbqd
+	option init tbqd
 
 config qos
 	option init qos

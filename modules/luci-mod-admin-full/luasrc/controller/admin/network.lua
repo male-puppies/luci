@@ -122,10 +122,10 @@ function index()
 			page = entry({"admin", "network", "dhcplease_status"}, call("lease_status"), nil)
 			page.leaf = true
 
-			page = node("admin", "network", "hosts")
-			page.target = cbi("admin_network/hosts")
-			page.title  = _("Hostnames")
-			page.order  = 40
+			--page = node("admin", "network", "hosts")
+			--page.target = cbi("admin_network/hosts")
+			--page.title  = _("Hostnames")
+			--page.order  = 40
 		end
 
 		page  = node("admin", "network", "routes")

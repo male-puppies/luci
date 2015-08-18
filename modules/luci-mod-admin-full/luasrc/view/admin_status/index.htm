@@ -557,7 +557,7 @@
 
 	<table width="100%" cellspacing="10">
 		<tr><td width="33%"><%:Hostname%></td><td><%=luci.sys.hostname() or "?"%></td></tr>
-		<tr><td width="33%"><%:Model%></td><td><%=pcdata(boardinfo.model or boardinfo.system or "?")%></td></tr>
+		<tr><td width="33%"><%:Model%></td><td><!--<%=pcdata(boardinfo.model or boardinfo.system or "?")%>-->MW-R200</td></tr>
 		<tr><td width="33%"><%:Firmware Version%></td><td>
 			<%=pcdata(ver.distname)%> <%=pcdata(ver.distversion)%> /
 			<%=pcdata(ver.luciname)%> (<%=pcdata(ver.luciversion)%>)
@@ -629,7 +629,7 @@
 	</table>
 </fieldset>
 
-<fieldset class="cbi-section" style="display:none">
+<!--<fieldset class="cbi-section" style="display:none">
 	<legend><%:DHCPv6 Leases%></legend>
 
 	<table class="cbi-section-table" id="lease6_status_table">
@@ -643,7 +643,7 @@
 			<td colspan="4"><em><br /><%:Collecting data...%></em></td>
 		</tr>
 	</table>
-</fieldset>
+</fieldset>-->
 <% end %>
 
 <% if has_dsl then %>

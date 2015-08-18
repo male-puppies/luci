@@ -1411,6 +1411,9 @@ msgstr "Load"
 msgid "Load Average"
 msgstr ""
 
+msgid "Load Balancing"
+msgstr ""
+
 msgid "Loading"
 msgstr ""
 

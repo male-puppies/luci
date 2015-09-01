@@ -148,7 +148,8 @@ function dom.set_two(self, section)
 	end
 	command = command .. [[ get_registered_ip ]] .. domain .. [[ ]] .. use_ipv6 ..
 		[[ ]] .. force_ipversion .. [[ ]] .. force_dnstcp .. [[ ]] .. dnsserver
-	local ip = SYS.exec(command)
+	-- local ip = SYS.exec(command)
+	local ip = ""
 	if ip == "" then ip = translate("no data") end
 	return ip
 end

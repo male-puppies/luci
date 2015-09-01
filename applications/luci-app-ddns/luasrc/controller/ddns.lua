@@ -125,11 +125,11 @@ local function _get_status()
 		local command = [[/usr/lib/ddns/dynamic_dns_lucihelper.sh]]
 		command = command .. [[ get_registered_ip ]] .. domain .. [[ ]] .. use_ipv6 ..
 			[[ ]] .. force_ipversion .. [[ ]] .. force_dnstcp .. [[ ]] .. dnsserver
-		local reg_ip = SYS.exec(command)
-		if reg_ip == "" then
-			reg_ip = "_nodata_"
-		end
-
+		-- local reg_ip = SYS.exec(command)
+		-- if reg_ip == "" then
+		-- 	reg_ip = "_nodata_"
+		-- end
+		local reg_ip = "_nodata_"
 		-- fill transfer array
 		data[#data+1]	= {
 			section  = section,

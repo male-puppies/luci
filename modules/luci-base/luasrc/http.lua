@@ -232,5 +232,8 @@ urldecode = protocol.urldecode
 urlencode = protocol.urlencode
 
 function write_json(x)
-	util.serialize_json(x, write)
+	-- util.serialize_json(x, write)
+	local s = util.serialize_json(x)
+	header("Content-Length", #s)
+	write(s)
 end

@@ -261,6 +261,7 @@ m.uci:foreach("network", "switch",
 			end
 
 			m:set(section, "ports", table.concat(p, " "))
+			m:set(section, "vlan", value)
 			return Value.write(self, section, value)
 		end
 

@@ -276,7 +276,11 @@ function action_flashops()
 				msg   = luci.i18n.translate("The system is flashing now.<br /> DO NOT POWER OFF THE DEVICE!<br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device again, depending on your settings."),
 				addr  = (#keep > 0) and "192.168.1.1" or nil
 			})
-			fork_exec("killall dropbear uhttpd; /ugw/script/stop_all.sh; sleep 1; /sbin/sysupgrade %s %q" %{ keep, image_tmp })
+			if keep == "" then 
+				fork_exec("killall dropbear uhttpd; /ugw/script/stop_all.sh; sleep 1; /sbin/sysupgrade %s %q" %{ keep, image_tmp })
+			else 
+				fork_exec("killall dropbear uhttpd; /ugw/script/reset_data.sh; sleep 1; /sbin/sysupgrade %s %q" %{ keep, image_tmp })
+			end
 		end
 	elseif reset_avail and luci.http.formvalue("reset") then
 		--

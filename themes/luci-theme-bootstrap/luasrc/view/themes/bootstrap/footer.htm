@@ -15,8 +15,8 @@
 %>
    <footer>
     <!--<a href="http://luci.subsignal.org/">Powered by <%= ver.luciname %> (<%= ver.luciversion %>)</a> / <%= ver.distversion %>-->
-    Copyright © 2015 深圳网络通信设备科技有限公司
-    <% if #categories > 1 then %>
+    Copyright © 2015 YXA10015907
+	<% if #categories > 1 then %>
      <ul class="breadcrumb pull-right" id="modemenu">
 	    <% for i, r in ipairs(categories) do %>
 		    <li<% if request[1] == r then %> class="active"<%end%>><a href="<%=controller%>/<%=r%>/"><%=striptags(translate(tree.nodes[r].title))%></a> <span class="divider">|</span></li>

@@ -12,7 +12,7 @@ config zone
 
 config zone
 	option name		wan
-	option input	DROP 
+	option input	ACCEPT 
 	option output	ACCEPT 
 	option forward	DROP 
 	option masq		1 

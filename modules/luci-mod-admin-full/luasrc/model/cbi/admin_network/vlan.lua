@@ -77,7 +77,7 @@ m.uci:foreach("network", "switch",
 		end
 
 
-		-- Switch properties
+		--[[ Switch properties
 		s = m:section(NamedSection, x['.name'], "switch",
 			switch_title and translatef("Switch %q (%s)", switch_name, switch_title)
 					      or translatef("Switch %q", switch_name))
@@ -87,7 +87,7 @@ m.uci:foreach("network", "switch",
 		if has_vlan then
 			s:option(Flag, has_vlan, translate("Enable VLAN functionality"))
 		end
-
+		--]]
 		if has_learn then
 			x = s:option(Flag, has_learn, translate("Enable learning and aging"))
 			x.default = x.enabled

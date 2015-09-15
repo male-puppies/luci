@@ -11,7 +11,7 @@ m = Map("firewall",
 	translate("The firewall creates zones over your network interfaces to control network traffic flow."))
 
 fw.init(m.uci)
-
+--[[
 s = m:section(TypedSection, "defaults", translate("General Settings"))
 s.anonymous = true
 s.addremove = false
@@ -32,7 +32,7 @@ for i, v in ipairs(p) do
 	v:value("DROP", translate("drop"))
 	v:value("ACCEPT", translate("accept"))
 end
-
+--]]
 
 s = m:section(TypedSection, "zone", translate("Zones"))
 s.template = "cbi/tblsection"

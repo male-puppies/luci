@@ -4,11 +4,11 @@
 local ipc = require "luci.ip"
 
 m = Map("dhcp", translate("DHCP and DNS"),
-	translate("Dnsmasq is a combined <abbr title=\"Dynamic Host Configuration Protocol" ..
+	translate(""--[["Dnsmasq is a combined <abbr title=\"Dynamic Host Configuration Protocol" ..
 		"\">DHCP</abbr>-Server and <abbr title=\"Domain Name System\">DNS</abbr>-" ..
 		"Forwarder for <abbr title=\"Network Address Translation\">NAT</abbr> " ..
-		"firewalls"))
-
+		"firewalls"--]]))
+--[[
 s = m:section(TypedSection, "dnsmasq", translate("Server Settings"))
 s.anonymous = true
 s.addremove = false
@@ -208,7 +208,7 @@ db = s:taboption("tftp", Value, "dhcp_boot",
 db.optional = true
 db:depends("enable_tftp", "1")
 db.placeholder = "pxelinux.0"
-
+--]]
 
 m:section(SimpleSection).template = "admin_network/lease_status"
 

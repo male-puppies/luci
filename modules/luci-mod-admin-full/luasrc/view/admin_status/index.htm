@@ -515,7 +515,7 @@
 
 			if (e = document.getElementById('memtotal'))
 				e.innerHTML = progressbar(
-					((info.memory.free + info.memory.buffered) / 1024) + " <%:kB%>",
+					(((info.memory.total) - (info.memory.free + info.memory.buffered)) / 1024) + " <%:kB%>",
 					(info.memory.total / 1024) + " <%:kB%>"
 				);
 
@@ -556,12 +556,12 @@
 	<legend><%:System%></legend>
 
 	<table width="100%" cellspacing="10">
-		<tr><td width="33%"><%:Hostname%></td><td><%=luci.sys.hostname() or "?"%></td></tr>
+		<!--<tr><td width="33%"><%:Hostname%></td><td><%=luci.sys.hostname() or "?"%></td></tr>-->
 		<tr><td width="33%"><%:Model%></td><td><!--<%=pcdata(boardinfo.model or boardinfo.system or "?")%>-->A100</td></tr>
 		<tr><td width="33%"><%:Firmware Version%></td><td>
 			<%=pcdata(ver.distname)%> <%=pcdata(ver.distversion)%> 
 		</td></tr>
-		<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>
+		<!--<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>-->
 		<tr><td width="33%"><%:Local Time%></td><td id="localtime">-</td></tr>
 		<tr><td width="33%"><%:Uptime%></td><td id="uptime">-</td></tr>
 		<tr><td width="33%"><%:Load Average%></td><td id="loadavg">-</td></tr>
@@ -573,8 +573,8 @@
 
 	<table width="100%" cellspacing="10">
 		<tr><td width="33%"><%:Total Available%></td><td id="memtotal">-</td></tr>
-		<tr><td width="33%"><%:Free%></td><td id="memfree">-</td></tr>
-		<tr><td width="33%"><%:Buffered%></td><td id="membuff">-</td></tr>
+		<!--<tr><td width="33%"><%:Free%></td><td id="memfree">-</td></tr>
+		<tr><td width="33%"><%:Buffered%></td><td id="membuff">-</td></tr>-->
 	</table>
 </fieldset>
 
@@ -611,7 +611,7 @@
 	</table>
 </fieldset>
 
-<% if has_dhcp then %>
+<% if has_dhcp and false then %>
 <fieldset class="cbi-section">
 	<legend><%:DHCP Leases%></legend>
 
@@ -628,7 +628,7 @@
 	</table>
 </fieldset>
 
-<!--<fieldset class="cbi-section" style="display:none">
+<fieldset class="cbi-section" style="display:none">
 	<legend><%:DHCPv6 Leases%></legend>
 
 	<table class="cbi-section-table" id="lease6_status_table">
@@ -642,7 +642,7 @@
 			<td colspan="4"><em><br /><%:Collecting data...%></em></td>
 		</tr>
 	</table>
-</fieldset>-->
+</fieldset>
 <% end %>
 
 <% if has_dsl then %>

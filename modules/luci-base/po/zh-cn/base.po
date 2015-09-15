@@ -1,4 +1,4 @@
-msgid ""
+keyongmsgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
@@ -1382,8 +1382,59 @@ msgstr "平均负载"
 msgid "Load Balancing"
 msgstr "负载均衡"
 
+msgid "Interface Status"
+msgstr "接口状态"
+
+msgid "MWAN Interface Live Status"
+msgstr "多WAN接口实时状态"
+
+msgid "Disabled"
+msgstr "禁用"
+
+msgid "Offline"
+msgstr "离线"
+
+msgid "Online"
+msgstr "在线"
+
+msgid "tracking off"
+msgstr "跟踪关闭"
+
+msgid "tracking on"
+msgstr "跟踪打开"
+
+msgid "MWAN Interface Configuration"
+msgstr "多WAN接口配置"
+
+msgid "MWAN Member Configuration"
+msgstr "多WAN成员配置"
+
+msgid "MWAN Policy Configuration"
+msgstr "多WAN策略配置"
+
+msgid "MWAN Rules Configuration"
+msgstr "多WAN规则配置"
+
 msgid "Loading"
 msgstr "加载中"
+
+msgid "Members"
+msgstr "成员"
+
+msgid "Policies"
+msgstr "策略"
+
+msgid "Rules"
+msgstr "规则"
+
+msgid "WARNING: some interfaces have no default route in the main routing table!"
+msgstr "警告: 该接口在主路由表里没有默认路由!"
+
+msgid "WARNING: some interfaces have no metric configured in /etc/config/network!"
+msgstr "警告: 在/etc/config/network里该接口没有标准配置!"
+
+msgid "WARNING: some interfaces are configured incorrectly or not at all in /etc/config/network!"
+msgstr "警告：一些接口配置不正确或根本没有在/ etc/config/network！"
 
 msgid "Local IPv4 address"
 msgstr "本地IPv4地址"
@@ -2644,7 +2695,7 @@ msgid ""
 msgstr "上传备份存档以恢复配置。"
 
 msgid "Total Available"
-msgstr "可用数"
+msgstr "内存使用率"
 
 msgid "Traceroute"
 msgstr "Traceroute"

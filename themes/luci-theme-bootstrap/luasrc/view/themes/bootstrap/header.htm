@@ -107,13 +107,14 @@
   <%-= css %>
   </style>
   <% end -%>
+  <script type="text/javascript" src="<%=resource%>/js/black/jquery-1.11.3.min.js"></script>
   <script src="<%=resource%>/xhr.js"></script>
  </head>
 
  <body class="lang_<%=luci.i18n.context.lang%> <%- if node then %><%= striptags( node.title ) %><%- end %>">
   <header>
    <div class="fill">
-    <div class="container">
+    <div class="container" style="width:180px !important;margin-left:0 !important;">
      <a class="brand" href="#"><%=translate('Gateway GUI')%></a>
      <ul class="nav">
 	 <%-
@@ -149,7 +150,7 @@
                 if #grandchildren > 0 then
 	%>
         <li class="dropdown">
-            <a class="menu" href="#"><%=pcdata(striptags(translate(nnode.title)))%></a>
+            <a class="menu" href="javascript:;"><%=pcdata(striptags(translate(nnode.title)))%></a>
             <%- submenu("/" .. category .. "/" .. r .. "/", nnode) %>
         </li>
 	<%          else %>
@@ -189,6 +190,24 @@
     </div>
    </div>
   </header>
+  <script type="text/javascript">
+	$("header ul.dropdown-menu li a").each(function(index, element) {
+		var httpUrl = window.location.href;
+		if (httpUrl.indexOf($(element).attr("href")) > 0) {
+			$(element).parent("li").addClass("li-curror").closest(".dropdown").addClass("ul-curror");
+			$(element).closest("ul.dropdown-menu").show();
+			return false;
+		}
+	})
+	$("header ul.nav").on("click", "li.dropdown a.menu", function() {
+		$(this).siblings("ul.dropdown-menu").slideToggle();
+		$(this).parent().siblings("li").find("ul.dropdown-menu").slideUp();
+	})
+	$("header ul.nav").on("click", "ul.dropdown-menu li", function() {
+		$(".nav .dropdown li.li-curror").removeClass("li-curror");
+		$(this).addClass("li-curror");
+	})
+  </script>
 
 <%- if luci.sys.process.info("uid") == 0 and luci.sys.user.getuser("root") and not luci.sys.user.getpasswd("root") then -%>
 <div class="container">

@@ -158,6 +158,10 @@ textarea {
 	vertical-align: top;
 }
 
+.hide {
+	display: none;
+}
+
 /*
  * Scaffolding
  * Basic and global styles for generating a grid system, structural layout, and page templates
@@ -518,6 +522,9 @@ input[type=checkbox], input[type=radio] {
 	height: auto;
 	padding: 0;
 	margin: 3px 0;
+	margin-right: 5px;
+	position: relative;
+	top: 1px;
 	*margin-top: 0;
 	/* IE6-7 */
 
@@ -1888,7 +1895,7 @@ header .pull-right { padding-top: 8px; }
 
 .cbi-value-field input[type=checkbox],
 .cbi-value-field input[type=radio] {
-	margin-top: 8px;
+	margin-top: 7px;
 	margin-right: 6px;
 }
 
@@ -2087,4 +2094,19 @@ td.cbi-value-field var {
 .uci-change-legend-label var del {
 	line-height: 6px;
 	border: none;
+}
+
+.icon-no {
+	padding-left: 18px;
+	background: url("../resources/cbi/reset.gif") no-repeat;
+}
+
+.icon-ok {
+	padding-left: 18px;
+	background: url("../resources/cbi/save.gif") no-repeat;
+}
+
+.underline {
+	color: #C00;
+	text-decoration: underline;
 }

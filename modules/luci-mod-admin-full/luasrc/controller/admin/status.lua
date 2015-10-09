@@ -7,6 +7,10 @@ module("luci.controller.admin.status", package.seeall)
 function index()
 	entry({"admin", "status"}, alias("admin", "status", "overview"), _("Status"), 20).index = true
 	entry({"admin", "status", "overview"}, template("admin_status/index"), _("Overview"), 1)
+	
+	entry({"admin", "status", "onlineuserlist"}, template("admin_status/onlineuserlist"), _("在线用户"), 2) 
+	
+	
 	--entry({"admin", "status", "iptables"}, call("action_iptables"), _("Firewall"), 2).leaf = true
 	entry({"admin", "status", "routes"}, template("admin_status/routes"), _("Routes"), 3)
 	entry({"admin", "status", "syslog"}, call("action_syslog"), _("System Log"), 4)

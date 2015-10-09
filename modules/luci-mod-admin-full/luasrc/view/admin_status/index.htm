@@ -47,6 +47,7 @@
 			luci.sys.exec("sysctl net.ipv4.netfilter.ip_conntrack_max") or
 			""):match("%d+")) or 4096
 
+		local leases = stat.dhcp_leases()
 		local rv = {
 			uptime     = sysinfo.uptime or 0,
 			localtime  = os.date(),
@@ -55,9 +56,10 @@
 			swap       = swapinfo,
 			connmax    = conn_max,
 			conncount  = conn_count,
-			leases     = stat.dhcp_leases(),
+			leases     = leases,
 			leases6    = stat.dhcp6_leases(),
-			wifinets   = stat.wifi_networks()
+			wifinets   = stat.wifi_networks(),
+			usercount  = #leases,
 		}
 
 		if wan then
@@ -504,6 +506,8 @@
 
 			if (e = document.getElementById('uptime'))
 				e.innerHTML = String.format('%t', info.uptime);
+			if (e = document.getElementById('usercount'))
+				e.innerHTML = String.format('%d', info.usercount);
 
 			if (e = document.getElementById('loadavg'))
 				e.innerHTML = String.format(
@@ -565,6 +569,7 @@
 		<tr><td width="33%"><%:Local Time%></td><td id="localtime">-</td></tr>
 		<tr><td width="33%"><%:Uptime%></td><td id="uptime">-</td></tr>
 		<tr><td width="33%"><%:Load Average%></td><td id="loadavg">-</td></tr>
+		<tr><td width="33%"><%:在线用户数%></td><td id="usercount">-</td></tr>
 	</table>
 </fieldset>
 

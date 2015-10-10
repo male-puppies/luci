@@ -2095,18 +2095,3 @@ td.cbi-value-field var {
 	line-height: 6px;
 	border: none;
 }
-
-.icon-no {
-	padding-left: 18px;
-	background: url("../resources/cbi/reset.gif") no-repeat;
-}
-
-.icon-ok {
-	padding-left: 18px;
-	background: url("../resources/cbi/save.gif") no-repeat;
-}
-
-.underline {
-	color: #C00;
-	text-decoration: underline;
-}

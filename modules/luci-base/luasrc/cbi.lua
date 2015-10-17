@@ -1409,6 +1409,18 @@ function AbstractValue.cfgvalue(self, section)
 	else
 		value = self.map:get(section, self.option)
 	end
+	if self.option and self.option == "dhcp_option" and value then
+		local dnsip
+		if type(value) == "table" then
+			for k, v in pairs(value) do 
+				require("luci.log").log(k, v)
+				dnsip = v:match("6,(.+)") or v
+			end
+		else
+			dnsip = value:match("6,(.+)") or value	
+		end
+		value = dnsip
+	end
 
 	if not value then
 		return nil
@@ -1448,6 +1460,11 @@ AbstractValue.transform = AbstractValue.validate
 
 -- Write to UCI
 function AbstractValue.write(self, section, value)
+	if self.option == "dhcp_option" and value then
+		local tmp = string.format("6,%s",value)
+		value = tmp
+	end 
+	--require("luci.log").log("test---------", self.option, section, type(value) == 'string' and value or "xxx")
 	return self.map:set(section, self.option, value)
 end
 
@@ -1718,6 +1735,15 @@ function DynamicList.write(self, section, value)
 	local t = { }
 
 	if type(value) == "table" then
+		if self.option and self.option == "dhcp_option" and self.config and self.config == "dhcp" then 
+			local tmp = {}
+			for _, v in ipairs(value) do
+				if #v > 0 then 
+					table.insert(tmp, "6,"..v)
+				end 
+			end
+			value = tmp
+		end
 		local x
 		for _, x in ipairs(value) do
 			if x and #x > 0 then
@@ -1749,6 +1775,13 @@ function DynamicList.cfgvalue(self, section)
 			end
 		end
 		value = t
+	elseif value and self.option and self.option == "dhcp_option" and self.config and self.config == "dhcp" then 
+	 	local tmp = {}
+	 	for _, v in ipairs(value) do 
+	 		local dnsip = v:match("6,(.+)") or v
+	 		table.insert(tmp, dnsip)
+	 	end 
+	 	value = tmp
 	end
 
 	return value

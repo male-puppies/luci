@@ -392,14 +392,14 @@ if has_dnsmasq and net:proto() == "static" then
 	local has_section = false
 
 	m2.uci:foreach("dhcp", "dhcp", function(s)
-		if s.interface == arg[1] then
+		if s.interface == arg[1] and (s and s.interface:find("lan")) then
 			has_section = true
 			return false
 		end
 	end)
 
 	if not has_section and has_dnsmasq then
-
+		if net:name():find("lan") then 
 		s = m2:section(TypedSection, "dhcp", translate("DHCP Server"))
 		s.anonymous   = true
 		s.cfgsections = function() return { "_enable" } end
@@ -408,7 +408,7 @@ if has_dnsmasq and net:proto() == "static" then
 		x.title      = translate("No DHCP Server configured for this interface")
 		x.inputtitle = translate("Setup DHCP Server")
 		x.inputstyle = "apply"
-
+		end
 	elseif has_section then
 
 		s = m2:section(TypedSection, "dhcp", translate("DHCP Server"))
@@ -416,7 +416,7 @@ if has_dnsmasq and net:proto() == "static" then
 		s.anonymous = true
 		s:tab("general",  translate("General Setup"))
 		s:tab("advanced", translate("Advanced Settings"))
-		s:tab("ipv6", translate("IPv6 Settings"))
+		-- s:tab("ipv6", translate("IPv6 Settings"))
 
 		function s.filter(self, section)
 			return m2.uci:get("dhcp", section, "interface") == arg[1]
@@ -443,7 +443,7 @@ if has_dnsmasq and net:proto() == "static" then
 			translate("Expiry time of leased addresses, minimum is 2 minutes (<code>2m</code>)."))
 		ltime.rmempty = true
 		ltime.default = "12h"
-
+--[[
 		local dd = s:taboption("advanced", Flag, "dynamicdhcp",
 			translate("Dynamic <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</abbr>"),
 			translate("Dynamically allocate DHCP addresses for clients. If disabled, only " ..
@@ -464,10 +464,9 @@ if has_dnsmasq and net:proto() == "static" then
 
 		mask.optional = true
 		mask.datatype = "ip4addr"
-
-		s:taboption("advanced", DynamicList, "dhcp_option", translate("DHCP-Options"),
-			translate("Define additional DHCP options, for example \"<code>6,192.168.2.1," ..
-				"192.168.2.2</code>\" which advertises different DNS servers to clients."))
+--]]
+		s:taboption("general", Value, "dhcp_option", translate("DNS"),
+			translate("如果你想添加多个DNS服务器,你必须使用','隔开，例如：8.8.8.8,8.8.4.4"))
 
 		for i, n in ipairs(s.children) do
 			if n ~= ignore then
@@ -475,6 +474,8 @@ if has_dnsmasq and net:proto() == "static" then
 			end
 		end
 
+		require("luci.log").logf("%s", os.date())
+--[[
 		o = s:taboption("ipv6", ListValue, "ra", translate("Router Advertisement-Service"))
 		o:value("", translate("disabled"))
 		o:value("server", translate("server mode"))
@@ -507,7 +508,7 @@ if has_dnsmasq and net:proto() == "static" then
 
 		s:taboption("ipv6", DynamicList, "dns", translate("Announced DNS servers"))
 		s:taboption("ipv6", DynamicList, "domain", translate("Announced DNS domains"))
-
+--]]
 	else
 		m2 = nil
 	end

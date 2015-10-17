@@ -466,7 +466,7 @@ if has_dnsmasq and net:proto() == "static" then
 		mask.datatype = "ip4addr"
 --]]
 		s:taboption("general", Value, "dhcp_option", translate("DNS"),
-			translate("Èç¹ûÄãÏëÌí¼Ó¶à¸öDNS·şÎñÆ÷,Äã±ØĞëÊ¹ÓÃ','¸ô¿ª£¬ÀıÈç£º8.8.8.8,8.8.4.4"))
+			translate("å¦‚æœä½ æƒ³æ·»åŠ å¤šä¸ªDNSæœåŠ¡å™¨,ä½ å¿…é¡»ä½¿ç”¨','éš”å¼€ï¼Œä¾‹å¦‚ï¼š8.8.8.8,8.8.4.4"))
 
 		for i, n in ipairs(s.children) do
 			if n ~= ignore then
@@ -474,7 +474,6 @@ if has_dnsmasq and net:proto() == "static" then
 			end
 		end
 
-		require("luci.log").logf("%s", os.date())
 --[[
 		o = s:taboption("ipv6", ListValue, "ra", translate("Router Advertisement-Service"))
 		o:value("", translate("disabled"))

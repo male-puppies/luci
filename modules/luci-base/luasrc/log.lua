@@ -19,3 +19,10 @@ function logm(msg)
 		file:flush()
 	end
 end
+
+
+function logf(fmt, ...)
+	local s = format(fmt, ...)
+	file:write(s)
+	file:flush()
+end

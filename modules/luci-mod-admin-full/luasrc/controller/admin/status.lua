@@ -36,11 +36,19 @@ end
 
 function action_syslog()
 	local syslog = luci.sys.syslog()
+	local max = 100 * 1024
+	if #syslog > max then 
+		syslog = syslog:sub(1, max)
+	end 
 	luci.template.render("admin_status/syslog", {syslog=syslog})
 end
 
 function action_dmesg()
 	local dmesg = luci.sys.dmesg()
+	local max = 100 * 1024
+	if #dmesg > max then 
+		dmesg = dmesg:sub(1, max)
+	end 
 	luci.template.render("admin_status/dmesg", {dmesg=dmesg})
 end
 

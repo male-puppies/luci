@@ -47,7 +47,7 @@
 			luci.sys.exec("sysctl net.ipv4.netfilter.ip_conntrack_max") or
 			""):match("%d+")) or 4096
 
-		local leases = stat.dhcp_leases()
+		--local leases = stat.dhcp_leases()
 		local rv = {
 			uptime     = sysinfo.uptime or 0,
 			localtime  = os.date(),
@@ -56,10 +56,10 @@
 			swap       = swapinfo,
 			connmax    = conn_max,
 			conncount  = conn_count,
-			leases     = leases,
+		--	leases     = leases,
 			leases6    = stat.dhcp6_leases(),
 			wifinets   = stat.wifi_networks(),
-			usercount  = #leases,
+			usercount  = luci.sys.exec("auth_tool '{\"GetAllUser\":1}' | grep st:1 | wc -l"),
 		}
 
 		if wan then

@@ -3,7 +3,7 @@
 
 local ipc = require "luci.ip"
 
-m = Map("dhcp", translate("DHCP and DNS"),
+m = Map("dhcp", translate("静态IP分配"),
 	translate(""--[["Dnsmasq is a combined <abbr title=\"Dynamic Host Configuration Protocol" ..
 		"\">DHCP</abbr>-Server and <abbr title=\"Domain Name System\">DNS</abbr>-" ..
 		"Forwarder for <abbr title=\"Network Address Translation\">NAT</abbr> " ..
@@ -235,7 +235,7 @@ mac.rmempty  = true
 ip = s:option(Value, "ip", translate("<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-Address"))
 ip.datatype = "or(ip4addr,'ignore')"
 
-hostid = s:option(Value, "hostid", translate("<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Suffix (hex)"))
+--hostid = s:option(Value, "hostid", translate("<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Suffix (hex)"))
 
 ipc.neighbors({ family = 4 }, function(n)
 	if n.mac and n.dest then

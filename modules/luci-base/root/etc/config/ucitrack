@@ -16,7 +16,7 @@ config olsr
 	option init olsrd
 
 config dhcp
-	option init dnsmasq
+	option init dhcpd
 	list affects odhcpd
 
 config odhcpd

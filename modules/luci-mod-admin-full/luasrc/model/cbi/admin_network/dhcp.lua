@@ -210,7 +210,7 @@ db:depends("enable_tftp", "1")
 db.placeholder = "pxelinux.0"
 --]]
 
-m:section(SimpleSection).template = "admin_network/lease_status"
+--m:section(SimpleSection).template = "admin_network/lease_status"
 
 s = m:section(TypedSection, "host", translate("Static Leases"),
 	translate("Static leases are used to assign fixed IP addresses and symbolic hostnames to " ..

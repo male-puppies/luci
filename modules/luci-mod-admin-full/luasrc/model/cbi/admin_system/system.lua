@@ -31,8 +31,8 @@ o = s:taboption("general", DummyValue, "_systime", translate("Local Time"))
 o.template = "admin_system/clock_status"
 
 
-o = s:taboption("general", Value, "hostname", translate("Hostname"))
-o.datatype = "hostname"
+--o = s:taboption("general", Value, "hostname", translate("Hostname"))
+--o.datatype = "hostname"
 
 function o.write(self, section, value)
 	Value.write(self, section, value)
@@ -120,14 +120,14 @@ function o.write(self, section, value)
 	m.uci:set("luci", "main", "lang", value)
 end
 
-
+--[[
 o = s:taboption("language", ListValue, "_mediaurlbase", translate("Design"))
 for k, v in pairs(conf.themes) do
 	if k:sub(1, 1) ~= "." then
 		o:value(v, k)
 	end
 end
-
+--]]
 function o.cfgvalue(...)
 	return m.uci:get("luci", "main", "mediaurlbase")
 end
@@ -139,7 +139,7 @@ end
 
 --
 -- NTP
---
+--[[
 
 if has_ntpd then
 
@@ -212,5 +212,5 @@ if has_ntpd then
 
 	end
 end
-
+--]]
 return m

@@ -188,6 +188,14 @@ var cbi_validators = {
 	{
 		return (this.match(/^[a-zA-Z0-9_]+$/) != null);
 	},
+	
+	'uciname2': function()
+	{
+		var v = this;
+		var s = v.substring(0, 3);
+		if (!(s == "lan" || s == "wan")) return false;
+		return (this.match(/^[a-zA-Z0-9_]+$/) != null);
+	},
 
 	'range': function(min, max)
 	{

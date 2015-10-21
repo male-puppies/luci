@@ -1,4 +1,4 @@
-msgid ""
+keyongmsgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
@@ -47,6 +47,9 @@ msgstr "15分钟负载:"
 
 msgid "5 Minute Load:"
 msgstr "5分钟负载:"
+
+msgid "Gateway GUI"
+msgstr "网关管理平台"
 
 msgid "<abbr title=\"Basic Service Set Identifier\">BSSID</abbr>"
 msgstr "<abbr title=\"Basic Service Set Identifier\">BSSID</abbr>"
@@ -459,7 +462,7 @@ msgid ""
 "Click \"Generate archive\" to download a tar archive of the current "
 "configuration files. To reset the firmware to its initial state, click "
 "\"Perform reset\" (only possible with squashfs images)."
-msgstr "备份/恢复当前系统配置文件或重置OpenWrt(仅squashfs固件有效)。"
+msgstr "备份/恢复当前系统配置文件或重置。"
 
 msgid "Client"
 msgstr "客户端Client"
@@ -1382,8 +1385,51 @@ msgstr "平均负载"
 msgid "Load Balancing"
 msgstr "负载均衡"
 
+msgid "Interface Status"
+msgstr "接口状态"
+
+msgid "MWAN Interface Live Status"
+msgstr "多WAN接口实时状态"
+
+msgid "Disabled"
+msgstr "禁用"
+
+msgid "Offline"
+msgstr "离线"
+
+msgid "Online"
+msgstr "在线"
+
+msgid "tracking off"
+msgstr "跟踪关闭"
+
+msgid "tracking on"
+msgstr "跟踪打开"
+
+msgid "MWAN Interface Configuration"
+msgstr "多WAN接口配置"
+
+msgid "MWAN Member Configuration"
+msgstr "多WAN成员配置"
+
+msgid "MWAN Policy Configuration"
+msgstr "多WAN策略配置"
+
+msgid "MWAN Rule Configuration"
+msgstr "多WAN规则配置"
+
 msgid "Loading"
 msgstr "加载中"
+
+msgid "Members"
+msgstr "成员"
+
+msgid "Policies"
+msgstr "策略"
+
+msgid "Rules"
+msgstr "规则"
+
 
 msgid "Local IPv4 address"
 msgstr "本地IPv4地址"
@@ -2026,7 +2072,7 @@ msgid "Rebooting..."
 msgstr "重启中..."
 
 msgid "Reboots the operating system of your device"
-msgstr "重启OpenWrt"
+msgstr "重启设备"
 
 msgid "Receive"
 msgstr "接收"
@@ -2571,6 +2617,78 @@ msgstr "尚未设置密码。请为root用户设置密码以保护主机并开�
 msgid "This IPv4 address of the relay"
 msgstr "中继的IPv4地址"
 
+msgid "WARNING: this interface has no default route in the main routing table!"
+msgstr "警告：此接口的主路由表中没有缺省路由"
+
+msgid "WARNING: this interface is configured incorrectly or not at all in /etc/config/network!"
+msgstr "警告：此接口的网络配置不正确或者不存在"
+
+msgid "WARNING: this interface has no metric configured in /etc/config/network!"
+msgstr "警告：此接口配置在网络配置中无跃点数"
+
+msgid "WARNING: some interfaces have a higher reliability requirement than there are tracking IP addresses!"
+msgstr "警告：据追踪IP的结果显示，存在其他更为可靠的接口"
+
+msgid "WARNING: some interfaces are configured incorrectly or not at all in /etc/config/network!"
+msgstr "警告：一些接口在网络配置中不正确或没有配置"
+
+msgid "WARNING: some interfaces have no default route in the main routing table!"
+msgstr "警告：一些接口在主路由表中没有缺省路由"
+
+msgid "WARNING: some interfaces have no metric configured in /etc/config/network!"
+msgstr "警告：一些接口配置在网络配置中无跃点数"
+
+msgid "WARNING: some interfaces have duplicate metrics configured in /etc/config/network!"
+msgstr "警告：一些接口配置在网络配置中存在重复的跃点数"
+
+msgid ""
+"Rules specify which traffic will use a particular MWAN policy based on IP address, port or protocol<br />"
+"Rules are matched from top to bottom. Rules below a matching rule are ignored. Traffic not matching any rule is routed using the main routing table<br />"
+"Traffic destined for known (other than default) networks is handled by the main routing table. Traffic matching a rule, but all WAN interfaces for that policy are down will be blackholed<br />"
+"Names may contain characters A-Z, a-z, 0-9, _ and no spaces<br />"
+"Rules may not share the same name as configured interfaces, members or policies"
+msgstr ""
+"基于IP地址 端口号或者协议来指定流量转发规则，匹配规则能通过，不匹配规则会被忽略<br />"
+"不匹配规则的流量有主要路由表进行转发。已知网络流量（除了默认）由主要路由表处理<br />"
+"匹配规则的流量将陷入黑洞，除了符合所有广域网的WAN口政策<br />"
+"名字可能包含A-Z、a-z、0-9、_、不包含空格<br />"
+"规则名不能共享相同的名称来配置接口"
+
+msgid ""
+"Policies are profiles grouping one or more members controlling how MWAN distributes traffic<br />"
+"Member interfaces with lower metrics are used first. Interfaces with the same metric load-balance<br />"
+"Load-balanced member interfaces distribute more traffic out those with higher weights<br />"
+"Names may contain characters A-Z, a-z, 0-9, _ and no spaces. Names must be 15 characters or less<br />"
+"Policies may not share the same name as configured interfaces, members or rules"
+msgstr ""
+"策略是用分组控制一个或多个成员来让分配流量<br />"
+"低跃点数的成员接口首先被使用，相同的跃点数接口负载均衡<br />"
+"负载均衡成员接口分配更多的流量给权重高的成员<br />"
+"名字包含A-Z, a-z, 0-9, _ 并且不包含空格. 范围15个少于15个字符<br />"
+"策略名不能共享相同的策略名来配置接口 成员或规则"
+
+msgid ""
+"Members are profiles attaching a metric and weight to an MWAN interface<br />"
+"Names may contain characters A-Z, a-z, 0-9, _ and no spaces<br />"
+"Members may not share the same name as configured interfaces, policies or rules"
+msgstr ""
+"成员配置文件附加跃点数和MWAN3接口权重比<br />"
+"名字构成由A-Z, a-z, 0-9, _并且不能包含空格<br />"
+"成员名不能设置相同的名字来配置接口、策略、规则"
+
+msgid "" 
+"MWAN supports up to 250 physical and/or logical interfaces<br />"
+"MWAN requires that all interfaces have a unique metric configured in /etc/config/network<br />"
+"Names must match the interface name found in /etc/config/network (see advanced tab)<br />"
+"Names may contain characters A-Z, a-z, 0-9, _ and no spaces<br />"
+"Interfaces may not share the same name as configured members, policies or rules"
+msgstr ""
+"多WAN支持高达250个物理接口或逻辑接口<br />"
+"多WAN要求所有接口都网络配置中有唯一的跃点数<br />"
+"名称必须与网络配置中的接口名称一致（见高级选项卡）<br />"
+"名字可能包含A-Z、a-z、0-9、_、非空格<br />"
+"作为配置的成员，政策或规则接口不能用相同的名称"
+
 msgid ""
 "This is a list of shell glob patterns for matching files and directories to "
 "include during sysupgrade. Modified files in /etc/config/ and certain other "
@@ -2644,7 +2762,7 @@ msgid ""
 msgstr "上传备份存档以恢复配置。"
 
 msgid "Total Available"
-msgstr "可用数"
+msgstr "内存使用率"
 
 msgid "Traceroute"
 msgstr "Traceroute"
@@ -2740,7 +2858,7 @@ msgid ""
 "Upload a sysupgrade-compatible image here to replace the running firmware. "
 "Check \"Keep settings\" to retain the current configuration (requires an "
 "OpenWrt compatible firmware image)."
-msgstr "上传兼容的sysupgrade固件以刷新当前系统。"
+msgstr "上传固件以刷新当前系统。"
 
 msgid "Upload archive..."
 msgstr "上传备份..."

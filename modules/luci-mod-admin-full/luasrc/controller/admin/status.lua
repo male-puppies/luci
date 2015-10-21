@@ -1,18 +1,24 @@
 -- Copyright 2008 Steven Barth <steven@midlink.org>
 -- Copyright 2011 Jo-Philipp Wich <jow@openwrt.org>
 -- Licensed to the public under the Apache License 2.0.
-
+local js = require("cjson")
 module("luci.controller.admin.status", package.seeall)
 
 function index()
 	entry({"admin", "status"}, alias("admin", "status", "overview"), _("Status"), 20).index = true
 	entry({"admin", "status", "overview"}, template("admin_status/index"), _("Overview"), 1)
-	entry({"admin", "status", "onlineuserlist"}, template("admin_status/onlineuserlist"), _("在线认证用户"), 2) 
-	entry({"admin", "status", "iptables"}, call("action_iptables"), _("Firewall"), 2).leaf = true
-	entry({"admin", "status", "routes"}, template("admin_status/routes"), _("Routes"), 3)
-	entry({"admin", "status", "syslog"}, call("action_syslog"), _("System Log"), 4)
-	entry({"admin", "status", "dmesg"}, call("action_dmesg"), _("Kernel Log"), 5)
-	entry({"admin", "status", "processes"}, cbi("admin_status/processes"), _("Processes"), 6)
+
+	entry({"admin", "status", "dhcplease"}, template("admin_status/dhcplease"), _("DHCP列表"), 2)
+	entry({"admin", "status", "action_dhcplease"}, call("action_dhcplease")).leaf = true
+
+	entry({"admin", "status", "onlineuserlist"}, template("admin_status/onlineuserlist"), _("在线认证用户"), 3) 
+	
+	
+	--entry({"admin", "status", "iptables"}, call("action_iptables"), _("Firewall"), 2).leaf = true
+	entry({"admin", "status", "routes"}, template("admin_status/routes"), _("Routes"), 4)
+	entry({"admin", "status", "syslog"}, call("action_syslog"), _("System Log"), 5)
+	entry({"admin", "status", "dmesg"}, call("action_dmesg"), _("Kernel Log"), 6)
+	--entry({"admin", "status", "processes"}, cbi("admin_status/processes"), _("Processes"), 6)
 
 	entry({"admin", "status", "realtime"}, alias("admin", "status", "realtime", "load"), _("Realtime Graphs"), 7)
 
@@ -22,13 +28,26 @@ function index()
 	entry({"admin", "status", "realtime", "bandwidth"}, template("admin_status/bandwidth"), _("Traffic"), 2).leaf = true
 	entry({"admin", "status", "realtime", "bandwidth_status"}, call("action_bandwidth")).leaf = true
 
-	entry({"admin", "status", "realtime", "wireless"}, template("admin_status/wireless"), _("Wireless"), 3).leaf = true
-	entry({"admin", "status", "realtime", "wireless_status"}, call("action_wireless")).leaf = true
+	--entry({"admin", "status", "realtime", "wireless"}, template("admin_status/wireless"), _("Wireless"), 3).leaf = true
+	--entry({"admin", "status", "realtime", "wireless_status"}, call("action_wireless")).leaf = true
 
-	entry({"admin", "status", "realtime", "connections"}, template("admin_status/connections"), _("Connections"), 4).leaf = true
-	entry({"admin", "status", "realtime", "connections_status"}, call("action_connections")).leaf = true
+	--entry({"admin", "status", "realtime", "connections"}, template("admin_status/connections"), _("Connections"), 4).leaf = true
+	--entry({"admin", "status", "realtime", "connections_status"}, call("action_connections")).leaf = true
 
 	entry({"admin", "status", "nameinfo"}, call("action_nameinfo")).leaf = true
+end
+
+function action_dhcplease()
+	os.execute("lua /ugw/script/lease.lua")
+	local fp, err = io.open("/tmp/openwrt_leases.json", "rb")
+	if not fp then
+		luci.http.write_json({status = 1})
+	end
+	local s = fp:read("*a")
+	fp:close()
+
+	local data = js.decode(s)
+	luci.http.write_json({status = 0, data = data})
 end
 
 function action_syslog()

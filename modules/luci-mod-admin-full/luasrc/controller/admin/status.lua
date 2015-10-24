@@ -5,7 +5,7 @@ local js = require("cjson")
 module("luci.controller.admin.status", package.seeall)
 
 function index()
-	entry({"admin", "status"}, alias("admin", "status", "overview"), _("Status"), 20).index = true
+	entry({"admin", "status"}, alias("admin", "status", "overview"), _("Status"), 10).index = true
 	entry({"admin", "status", "overview"}, template("admin_status/index"), _("Overview"), 1)
 
 	entry({"admin", "status", "dhcplease"}, template("admin_status/dhcplease"), _("DHCP列表"), 2)

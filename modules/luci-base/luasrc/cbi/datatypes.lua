@@ -260,6 +260,10 @@ function uciname(val)
 	return (val:match("^[a-zA-Z0-9_]+$") ~= nil)
 end
 
+function uciname2(val)
+	return (val:match("^[a-zA-Z0-9_]+$") ~= nil)
+end
+
 function range(val, min, max)
 	val = tonumber(val)
 	min = tonumber(min)

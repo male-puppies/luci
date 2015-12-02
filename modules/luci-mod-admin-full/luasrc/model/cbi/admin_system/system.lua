@@ -137,57 +137,56 @@ function o.write(self, section, value)
 end
 
 
-
-
-
-so = s:taboption("general", ListValue, "debug_switch", translate("调试开关"))
-so:value("disable")
-so:value("enable")
-function so.write(self, section, value)
-	if not (value == "disable" or value == "enable") then 
-		return
+if fs.access("/ugw/apps/cfgmgr") then 
+	so = s:taboption("general", ListValue, "debug_switch", translate("调试开关"))
+	so:value("disable")
+	so:value("enable")
+	function so.write(self, section, value)
+		if not (value == "disable" or value == "enable") then 
+			return
+		end
+		package.cpath = "/ugw/lib/?.so;" .. package.cpath
+		local nx = require("nixio")
+		local js = require("luci.json")
+		local cli = nx.connect("127.0.0.1", 9997)
+		local struct = require("struct")
+		if not cli then 
+			return 
+		end 
+		local s = js.encode({"DebugSwitch", value})
+		local ret = cli:send(struct.pack("Is", #s, s))
+		if not ret then 
+			return 
+		end
+		cli:close()
+		self.map.uci:set("system", section, "debug_switch", value)
 	end
-	package.cpath = "/ugw/lib/?.so;" .. package.cpath
-	local nx = require("nixio")
-	local js = require("luci.json")
-	local cli = nx.connect("127.0.0.1", 9997)
-	local struct = require("struct")
-	if not cli then 
-		return 
-	end 
-	local s = js.encode({"DebugSwitch", value})
-	local ret = cli:send(struct.pack("Is", #s, s))
-	if not ret then 
-		return 
+	
+	lo = s:taboption("general", ListValue, "ledctrl_switch", translate("灯光开关"))
+	lo:value("enable")
+	lo:value("disable")
+	function lo.write(self, section, value)
+		if not (value == "disable" or value == "enable") then 
+			return
+		end
+		package.cpath = "/ugw/lib/?.so;" .. package.cpath
+		local nx = require("nixio")
+		local js = require("luci.json")
+		local cli = nx.connect("127.0.0.1", 9997)
+		local struct = require("struct")
+		if not cli then 
+			return 
+		end 
+		local s = js.encode({"LedctrlSwitch", value})
+		local ret = cli:send(struct.pack("Is", #s, s))
+		if not ret then 
+			return 
+		end
+		cli:close()
+		self.map.uci:set("system", section, "ledctrl_switch", value)
 	end
-	cli:close()
-	self.map.uci:set("system", section, "debug_switch", value)
 end
 
-
-lo = s:taboption("general", ListValue, "ledctrl_switch", translate("灯光开关"))
-lo:value("enable")
-lo:value("disable")
-function lo.write(self, section, value)
-	if not (value == "disable" or value == "enable") then 
-		return
-	end
-	package.cpath = "/ugw/lib/?.so;" .. package.cpath
-	local nx = require("nixio")
-	local js = require("luci.json")
-	local cli = nx.connect("127.0.0.1", 9997)
-	local struct = require("struct")
-	if not cli then 
-		return 
-	end 
-	local s = js.encode({"LedctrlSwitch", value})
-	local ret = cli:send(struct.pack("Is", #s, s))
-	if not ret then 
-		return 
-	end
-	cli:close()
-	self.map.uci:set("system", section, "ledctrl_switch", value)
-end
 --
 -- NTP
 --[[

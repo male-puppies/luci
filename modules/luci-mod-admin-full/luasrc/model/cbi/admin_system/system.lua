@@ -165,10 +165,10 @@ function so.write(self, section, value)
 end
 
 
-so = s:taboption("general", ListValue, "g_ledctrl", translate("灯光开关"))
-so:value("enable")
-so:value("disable")
-function so.write(self, section, value)
+lo = s:taboption("general", ListValue, "ledctrl_switch", translate("灯光开关"))
+lo:value("enable")
+lo:value("disable")
+function lo.write(self, section, value)
 	if not (value == "disable" or value == "enable") then 
 		return
 	end
@@ -186,7 +186,7 @@ function so.write(self, section, value)
 		return 
 	end
 	cli:close()
-	self.map.uci:set("system", section, "g_ledctrl", value)
+	self.map.uci:set("system", section, "ledctrl_switch", value)
 end
 --
 -- NTP

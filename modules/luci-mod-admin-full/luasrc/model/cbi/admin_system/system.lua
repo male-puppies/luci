@@ -153,7 +153,7 @@ if fs.access("/ugw/apps/cfgmgr") then
 		if not cli then 
 			return 
 		end 
-		local s = js.encode({"DebugSwitch", value})
+		local s = js.encode({"DebugSwitch", {group = "default", data = value}})
 		local ret = cli:send(struct.pack("Is", #s, s))
 		if not ret then 
 			return 
@@ -177,7 +177,7 @@ if fs.access("/ugw/apps/cfgmgr") then
 		if not cli then 
 			return 
 		end 
-		local s = js.encode({"LedctrlSwitch", value})
+		local s = js.encode({"LedctrlSwitch", {group = "default", data = value}})
 		local ret = cli:send(struct.pack("Is", #s, s))
 		if not ret then 
 			return 
